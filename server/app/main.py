@@ -24,10 +24,10 @@ PASSPHRASE = config['passphrase']
 # SSHクライアントオブジェクトの生成
 sshclient = SSHClient(HOST, PORT, USER, IDENTITYFILE, PASSPHRASE)
 
-@app.get("/pwd")
+@app.get('/pwd')
 def pwd():
     return sshclient.execute('pwd')
 
-@app.get("/ls")
+@app.get('/ls')
 def ls():
     return sshclient.execute('ls')
