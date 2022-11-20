@@ -18,6 +18,7 @@ from record.UserAdd import UserAddStruct
 from record.UserMod import UserModStruct
 from record.UserDel import UserDelStruct
 from record.GroupAdd import GroupAddStruct
+from record.GroupMod import GroupModStruct
 
 
 # FastAPIオブジェクトの生成
@@ -113,6 +114,16 @@ def group_post(groupname: str, group_add_struct: GroupAddStruct):
     # sudo
     # $ groupadd
     successed, stdout = sshclient.execute(sudo(group_add_struct.to_command(groupname)))
+    if successed:
+        return {}
+    else:
+        return {'error': stdout}
+
+@app.put('/group/{groupname}')
+def group_put(groupname: str, group_mod_struct: GroupModStruct):
+    # sudo
+    # $ groupmod
+    successed, stdout = sshclient.execute(sudo(group_mod_struct.to_command(groupname)))
     if successed:
         return {}
     else:
