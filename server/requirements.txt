@@ -1,0 +1,6 @@
+# fastapi
+fastapi
+uvicorn[standard]
+
+# SSHクライアント
+paramiko
