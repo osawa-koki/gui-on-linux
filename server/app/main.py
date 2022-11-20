@@ -54,7 +54,6 @@ def user():
     # $ id
     successed, stdout = sshclient.execute('cat /etc/passwd')
     if successed:
-        result = jc.parse('id', stdout)
-        return Parser.user(result)
+        return Parser.user(stdout)
     else:
         return {'error': stdout}
