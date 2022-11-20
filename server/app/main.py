@@ -1,5 +1,5 @@
 # FastAPIモジュール
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 
@@ -65,7 +65,7 @@ def user_get():
     else:
         return {'error': stdout}
 
-@app.post('/user')
+@app.post('/user', status_code=status.HTTP_201_CREATED)
 def user_post(user_add_struct: UserAddStruct):
     # sudo
     # $ useradd
