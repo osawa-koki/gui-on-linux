@@ -3,9 +3,10 @@ from fastapi import FastAPI
 
 # Python全般モジュール
 import yaml
+import jc
 
 # 独自モジュール
-from common.log import logging
+from common.Log import logging
 from common.SSHClient import SSHClient
 
 # FastAPIオブジェクトの生成
@@ -26,8 +27,23 @@ sshclient = SSHClient(HOST, PORT, USER, IDENTITYFILE, PASSPHRASE)
 
 @app.get('/pwd')
 def pwd():
-    return sshclient.execute('pwd')
+    successed, stdout = sshclient.execute('pwd')
+    if successed:
+        result = jc.parse('ls', stdout)
+        return result
+    else:
+        return {'error': stdout}
+
 
 @app.get('/ls')
 def ls():
-    return sshclient.execute('ls')
+    # $ ls
+    # $   -a # 全てのファイルを表示(隠しファイルも含む | 「.」「..」は除く)
+    # $   -p # ディレクトリには末尾に「/」を付与
+    # $   -l # 詳細情報を表示
+    successed, stdout = sshclient.execute('ls -Apl --full-time')
+    if successed:
+        result = jc.parse('ls', stdout)
+        return result
+    else:
+        return {'error': stdout}

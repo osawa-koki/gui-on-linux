@@ -1,6 +1,6 @@
 import paramiko
 
-from log import logging
+from common.Log import logging
 
 class SSHClient:
 
@@ -34,7 +34,11 @@ class SSHClient:
 
     def execute(self, command: str):
         stdin, stdout, stderr = self.client.exec_command(command)
-        return stdout.read().decode('utf-8')
+        is_success = stdout.channel.recv_exit_status() == 0
+        if is_success:
+            return True, stdout.read().decode('utf-8')
+        else:
+            return False, stderr.read().decode('utf-8')
 
     def __del__(self):
         self.client.close()
