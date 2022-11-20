@@ -129,3 +129,12 @@ def group_put(groupname: str, group_mod_struct: GroupModStruct):
     else:
         return {'error': stdout}
 
+@app.delete('/group/{groupname}', status_code=status.HTTP_204_NO_CONTENT)
+def group_delete(groupname: str):
+    # sudo
+    # $ groupdel
+    successed, stdout = sshclient.execute(sudo('groupdel {}'.format(groupname)))
+    if successed:
+        return {}
+    else:
+        return {'error': stdout}
