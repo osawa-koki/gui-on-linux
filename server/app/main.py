@@ -29,8 +29,7 @@ sshclient = SSHClient(HOST, PORT, USER, IDENTITYFILE, PASSPHRASE)
 def pwd():
     successed, stdout = sshclient.execute('pwd')
     if successed:
-        result = jc.parse('ls', stdout)
-        return result
+        return {'cd': stdout.strip()}
     else:
         return {'error': stdout}
 
