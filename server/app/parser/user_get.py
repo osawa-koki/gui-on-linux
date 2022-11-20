@@ -1,5 +1,5 @@
 
-def user(stdout):
+def user_get(stdout):
     lines = stdout.strip().splitlines()
     result = []
     for line in lines:

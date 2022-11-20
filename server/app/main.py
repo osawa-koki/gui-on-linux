@@ -52,19 +52,19 @@ def ls():
         return {'error': stdout}
 
 @app.get('/user')
-def user():
+def user_get():
     # $ cat /etc/passwd
     successed, stdout = sshclient.execute('cat /etc/passwd')
     if successed:
-        return Parser.user(stdout)
+        return Parser.user_get(stdout)
     else:
         return {'error': stdout}
 
 @app.get('/group')
-def group():
+def group_get():
     # $ cat /etc/group
     successed, stdout = sshclient.execute('cat /etc/group')
     if successed:
-        return Parser.group(stdout)
+        return Parser.group_get(stdout)
     else:
         return {'error': stdout}

@@ -1,5 +1,5 @@
 
-def group(stdio):
+def group_get(stdio):
     lines = stdio.strip().splitlines()
     result = []
     for line in lines:
