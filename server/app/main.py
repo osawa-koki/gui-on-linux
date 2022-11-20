@@ -8,6 +8,7 @@ import jc
 # 独自モジュール
 from common.Log import logging
 from common.SSHClient import SSHClient
+from parser.Parser import Parser
 
 # FastAPIオブジェクトの生成
 app = FastAPI()
@@ -45,5 +46,15 @@ def ls():
     if successed:
         result = jc.parse('ls', stdout)
         return result
+    else:
+        return {'error': stdout}
+
+@app.get('/user')
+def user():
+    # $ id
+    successed, stdout = sshclient.execute('cat /etc/passwd')
+    if successed:
+        result = jc.parse('id', stdout)
+        return Parser.user(result)
     else:
         return {'error': stdout}
