@@ -10,6 +10,7 @@ import jc
 # 独自モジュール
 from common.Log import logging
 from common.SSHClient import SSHClient
+from common.sudo import sudo
 from parser.Parser import Parser
 
 # 構造体モジュール
@@ -65,10 +66,10 @@ def user_get():
         return {'error': stdout}
 
 @app.post('/user')
-def user_post(user_add_struct: UserAddStruct, status_code=201):
+def user_post(user_add_struct: UserAddStruct):
     # sudo
     # $ useradd
-    successed, stdout = sshclient.execute("sudo " + user_add_struct.to_command())
+    successed, stdout = sshclient.execute(sudo(user_add_struct.to_command()))
     if successed:
         return {}
     else:
