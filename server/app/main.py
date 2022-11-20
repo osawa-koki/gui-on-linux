@@ -80,8 +80,7 @@ def user_post(user_add_struct: UserAddStruct):
 def user_put(username: str, user_mod_struct: UserModStruct):
     # sudo
     # $ usermod
-    user_mod_struct.username = username
-    successed, stdout = sshclient.execute(sudo(user_mod_struct.to_command()))
+    successed, stdout = sshclient.execute(sudo(user_mod_struct.to_command(username)))
     if successed:
         return {}
     else:

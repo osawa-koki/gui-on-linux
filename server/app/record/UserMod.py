@@ -10,7 +10,7 @@ class UserModStruct(BaseModel):
     create_home: bool = True
     home_dir: str = None
 
-    def to_command(self):
+    def to_command(self, username):
         command = 'usermod'
         if self.password:
             command += ' -p {}'.format(self.password)
@@ -26,7 +26,5 @@ class UserModStruct(BaseModel):
             command += ' -s {}'.format(self.shell)
         if not self.create_home:
             command += ' -m'
-        else:
-            command += ' -M'
-        command += ' {}'.format(self.username)
+        command += ' {}'.format(username)
         return command

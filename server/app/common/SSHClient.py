@@ -33,6 +33,8 @@ class SSHClient:
         self.client.connect(hostname=self.HOST, username=self.USER, port=self.PORT, key_filename=self.IDENTITYFILE, passphrase=self.PASSPHRASE)
 
     def execute(self, command: str):
+        logging.info('以下のコマンドを実行します。')
+        logging.info(command)
         stdin, stdout, stderr = self.client.exec_command(command)
         is_success = stdout.channel.recv_exit_status() == 0
         if is_success:
