@@ -16,6 +16,7 @@ from parser.Parser import Parser
 # 構造体モジュール
 from record.UserAdd import UserAddStruct
 from record.UserMod import UserModStruct
+from record.UserDel import UserDelStruct
 
 
 # FastAPIオブジェクトの生成
@@ -81,6 +82,16 @@ def user_put(username: str, user_mod_struct: UserModStruct):
     # sudo
     # $ usermod
     successed, stdout = sshclient.execute(sudo(user_mod_struct.to_command(username)))
+    if successed:
+        return {}
+    else:
+        return {'error': stdout}
+
+@app.delete('/user/{username}', status_code=status.HTTP_204_NO_CONTENT)
+def user_delete(username: str, user_del_struct: UserDelStruct):
+    # sudo
+    # $ userdel
+    successed, stdout = sshclient.execute(sudo(user_del_struct.to_command(username)))
     if successed:
         return {}
     else:
