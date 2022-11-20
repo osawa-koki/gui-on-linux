@@ -15,6 +15,7 @@ from parser.Parser import Parser
 
 # 構造体モジュール
 from record.UserAdd import UserAddStruct
+from record.UserMod import UserModStruct
 
 
 # FastAPIオブジェクトの生成
@@ -70,6 +71,17 @@ def user_post(user_add_struct: UserAddStruct):
     # sudo
     # $ useradd
     successed, stdout = sshclient.execute(sudo(user_add_struct.to_command()))
+    if successed:
+        return {}
+    else:
+        return {'error': stdout}
+
+@app.put('/user/{username}')
+def user_put(username: str, user_mod_struct: UserModStruct):
+    # sudo
+    # $ usermod
+    user_mod_struct.username = username
+    successed, stdout = sshclient.execute(sudo(user_mod_struct.to_command()))
     if successed:
         return {}
     else:
