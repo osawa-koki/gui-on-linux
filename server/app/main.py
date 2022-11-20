@@ -1,5 +1,7 @@
 # FastAPIモジュール
 from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
+from pydantic import BaseModel
 
 # Python全般モジュール
 import yaml
@@ -51,9 +53,18 @@ def ls():
 
 @app.get('/user')
 def user():
-    # $ id
+    # $ cat /etc/passwd
     successed, stdout = sshclient.execute('cat /etc/passwd')
     if successed:
         return Parser.user(stdout)
+    else:
+        return {'error': stdout}
+
+@app.get('/group')
+def group():
+    # $ cat /etc/group
+    successed, stdout = sshclient.execute('cat /etc/group')
+    if successed:
+        return Parser.group(stdout)
     else:
         return {'error': stdout}

@@ -3,4 +3,5 @@
 # 同ディレクトリ内にある各種パーサー関数をまとめて呼び出す
 class Parser():
     from parser.user import user
+    from parser.group import group
 
