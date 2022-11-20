@@ -12,6 +12,10 @@ from common.Log import logging
 from common.SSHClient import SSHClient
 from parser.Parser import Parser
 
+# 構造体モジュール
+from record.UserAdd import UserAddStruct
+
+
 # FastAPIオブジェクトの生成
 app = FastAPI()
 
@@ -57,6 +61,16 @@ def user_get():
     successed, stdout = sshclient.execute('cat /etc/passwd')
     if successed:
         return Parser.user_get(stdout)
+    else:
+        return {'error': stdout}
+
+@app.post('/user')
+def user_post(user_add_struct: UserAddStruct, status_code=201):
+    # sudo
+    # $ useradd
+    successed, stdout = sshclient.execute("sudo " + user_add_struct.to_command())
+    if successed:
+        return {}
     else:
         return {'error': stdout}
 
