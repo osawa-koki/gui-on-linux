@@ -17,6 +17,7 @@ from parser.Parser import Parser
 from record.UserAdd import UserAddStruct
 from record.UserMod import UserModStruct
 from record.UserDel import UserDelStruct
+from record.GroupAdd import GroupAddStruct
 
 
 # FastAPIオブジェクトの生成
@@ -106,3 +107,14 @@ def group_get():
         return Parser.group_get(stdout)
     else:
         return {'error': stdout}
+
+@app.post('/group/{groupname}', status_code=status.HTTP_201_CREATED)
+def group_post(groupname: str, group_add_struct: GroupAddStruct):
+    # sudo
+    # $ groupadd
+    successed, stdout = sshclient.execute(sudo(group_add_struct.to_command(groupname)))
+    if successed:
+        return {}
+    else:
+        return {'error': stdout}
+
