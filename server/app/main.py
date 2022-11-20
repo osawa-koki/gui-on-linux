@@ -27,6 +27,7 @@ sshclient = SSHClient(HOST, PORT, USER, IDENTITYFILE, PASSPHRASE)
 
 @app.get('/pwd')
 def pwd():
+    # $ pwd
     successed, stdout = sshclient.execute('pwd')
     if successed:
         return {'cd': stdout.strip()}
