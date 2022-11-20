@@ -22,12 +22,12 @@ IDENTITYFILE = config['identityfile']
 PASSPHRASE = config['passphrase']
 
 # SSHクライアントオブジェクトの生成
-client = SSHClient(HOST, PORT, USER, IDENTITYFILE, PASSPHRASE)
+sshclient = SSHClient(HOST, PORT, USER, IDENTITYFILE, PASSPHRASE)
 
 @app.get("/pwd")
 def pwd():
-    return client.execute('pwd')
+    return sshclient.execute('pwd')
 
 @app.get("/ls")
 def ls():
-    return client.execute('ls')
+    return sshclient.execute('ls')
