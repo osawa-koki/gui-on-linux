@@ -99,8 +99,9 @@ def user_delete(username: str, user_del_struct: UserDelStruct):
 
 @app.get('/group')
 def group_get():
+    # sudo
     # $ cat /etc/group
-    successed, stdout = sshclient.execute('cat /etc/group')
+    successed, stdout = sshclient.execute(sudo('cat /etc/group'))
     if successed:
         return Parser.group_get(stdout)
     else:
