@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import file_img from '../Assets/file.png';
 import user_img from '../Assets/user.png';
 import group_img from '../Assets/group.png';
+import proccess_img from '../Assets/proccess.png';
 import './root.scss';
 
 function Root() {
@@ -21,7 +22,7 @@ function Root() {
         <div className='description'></div>
       </Link>
       <Link className='RootImg' to="/process">
-        <img src="" alt="" />
+        <img src={proccess_img} alt="proccess" />
         <div className='description'></div>
       </Link>
       <Link className='RootImg' to="/net">
