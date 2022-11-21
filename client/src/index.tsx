@@ -12,6 +12,9 @@ import App from './App';
 import Root from './Pages/root';
 import NotFound from './Pages/notFound';
 
+// ルーティング設定
+import File from './Pages/file';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -21,6 +24,7 @@ root.render(
       <Routes>
         <Route path="/" element={<Root />} />
         <Route path="/app" element={<App />} />
+        <Route path="/file" element={<File />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
