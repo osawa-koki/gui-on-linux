@@ -26,7 +26,7 @@ function Root() {
         <img src={proccess_img} alt="proccess" />
         <div className='description'></div>
       </Link>
-      <Link className='RootImg' to="/net">
+      <Link className='RootImg' to="/netstat">
         <img src={netstat_img} alt="netstat" />
         <div className='description'></div>
       </Link>
