@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  nginx:
-    build: ./nginx/
+  web:
+    build: ./web/
     image: guiondocker_nginx
     ports:
-      - 8080:80
+      - 8080:8080
