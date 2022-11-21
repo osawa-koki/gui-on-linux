@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App from './App';
-import Index from './Pages/Index';
+import Root from './Pages/root';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -12,9 +12,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <h1>Hello React Router</h1>
       <Routes>
-        <Route path="/" element={<Index />} />
+        <Route path="/" element={<Root />} />
         <Route path="/app" element={<App />} />
       </Routes>
     </BrowserRouter>
