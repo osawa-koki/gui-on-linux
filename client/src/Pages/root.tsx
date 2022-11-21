@@ -4,6 +4,7 @@ import file_img from '../Assets/file.png';
 import user_img from '../Assets/user.png';
 import group_img from '../Assets/group.png';
 import proccess_img from '../Assets/proccess.png';
+import netstat_img from '../Assets/netstat.png';
 import './root.scss';
 
 function Root() {
@@ -26,7 +27,7 @@ function Root() {
         <div className='description'></div>
       </Link>
       <Link className='RootImg' to="/net">
-        <img src="" alt="" />
+        <img src={netstat_img} alt="netstat" />
         <div className='description'></div>
       </Link>
     </div>
