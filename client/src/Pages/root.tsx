@@ -1,28 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import file_img from '../Assets/file.png';
+import user_img from '../Assets/user.png';
 import './root.scss';
 
 function Root() {
   return (
     <div className="Root">
-      <Link to="/file">
+      <Link className='RootImg' to="/file">
         <img src={file_img} alt="file" />
         <div className='description'></div>
       </Link>
-      <Link to="/user">
+      <Link className='RootImg' to="/user">
+        <img src={user_img} alt="user" />
+        <div className='description'></div>
+      </Link>
+      <Link className='RootImg' to="/group">
         <img src="" alt="" />
         <div className='description'></div>
       </Link>
-      <Link to="/group">
+      <Link className='RootImg' to="/process">
         <img src="" alt="" />
         <div className='description'></div>
       </Link>
-      <Link to="/process">
-        <img src="" alt="" />
-        <div className='description'></div>
-      </Link>
-      <Link to="/net">
+      <Link className='RootImg' to="/net">
         <img src="" alt="" />
         <div className='description'></div>
       </Link>

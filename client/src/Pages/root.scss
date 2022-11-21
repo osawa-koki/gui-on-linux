@@ -1,5 +1,19 @@
 .Root {
-  h1 {
-    background-color: red;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 50px auto;
+  .RootImg {
+    position: relative;
+    margin-right: 25px;
+    margin-bottom: 25px;
+    box-shadow: none;
+    border: 1px gray solid;
+    &:hover {
+      box-shadow: 2px 2px rgba(0, 0, 0, 0.3);
+    }
+    img {
+      max-width: 150px;
+    }
   }
 }
