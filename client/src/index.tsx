@@ -24,7 +24,7 @@ root.render(
       <Routes>
         <Route path="/" element={<Root />} />
         <Route path="/app" element={<App />} />
-        <Route path="/file" element={<File />} />
+        <Route path="/file" element={<File pwd="null" />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
