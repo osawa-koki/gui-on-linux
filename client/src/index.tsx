@@ -1,7 +1,9 @@
 import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import Index from './Pages/Index';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -9,7 +11,13 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <h1>Hello React Router</h1>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/app" element={<App />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
