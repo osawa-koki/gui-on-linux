@@ -37,7 +37,7 @@ PASSPHRASE = config['passphrase']
 # SSHクライアントオブジェクトの生成
 sshclient = SSHClient(HOST, PORT, USER, IDENTITYFILE, PASSPHRASE)
 
-@app.get('/helloworld')
+@app.get('/api/helloworld')
 def helloworld():
     return 'Hello World'
 
