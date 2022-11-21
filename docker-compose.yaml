@@ -1,14 +1,18 @@
-version: '3'
+version: '3.8'
 
 services:
-  web:
-    build: ./web/
-    image: guiondocker_nginx
-    ports:
-      - 8080:8080
-  app:
+  pyapp:
     build: ./server/
     image: guiondocker_pyapp
+    container_name: guiondocker_pyapp
     # デバグ用にポートを開けておく
     ports:
       - 5000:5000
+  web:
+    build: ./web/
+    image: guiondocker_nginx
+    container_name: guiondocker_nginx
+    ports:
+      - 8080:8080
+    depends_on:
+      - pyapp
