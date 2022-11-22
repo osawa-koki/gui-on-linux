@@ -18,7 +18,9 @@ type Props = {
   cd: string | null;
   directories: string[];
   files: string[];
+  fileinfo: lsRecord[];
   popup: boolean;
+  popup_data: lsRecord;
 };
 
 class File extends React.Component {
@@ -27,7 +29,19 @@ class File extends React.Component {
     cd: null,
     directories: [],
     files: [],
-    popup: false
+    fileinfo: [],
+    popup: false,
+    popup_data: {
+      filename: '',
+      owner: '',
+      group: '',
+      size: 0,
+      date: new Date(1970, 1, 1),
+      flags: '',
+      links: 0,
+      epoch: 0,
+      epoch_utc: 0
+    }
   };
 
   ChangeDirectory(path: string) {
@@ -41,10 +55,15 @@ class File extends React.Component {
   }
 
   ShowDetail(filename: string) {
-    this.setState({
-      popup: true
-    });
-    console.log(filename);
+    for (let i = 0; i < this.state.fileinfo.length; i++) {
+      if (this.state.fileinfo[i].filename === filename) {
+        this.setState({
+          popup: true,
+          popup_data: this.state.fileinfo[i]
+        });
+        break;
+      }
+    }
   }
 
   removePopup() {
@@ -76,7 +95,8 @@ class File extends React.Component {
       });
       this.setState({
         directories: dirs,
-        files: files
+        files: files,
+        fileinfo: response
       });
     });
   }
@@ -101,6 +121,14 @@ class File extends React.Component {
         <div className={((this.state.popup) ? "on" : "off") + " dirfile-popup-background"}>
           <div className='dirfile-popup'>
             <div className='dirfile-popup-eraser' onClick={() => {this.removePopup()}}>×</div>
+            <div className='filename'>{this.state.popup_data.filename}</div>
+            <div className='owner'>{this.state.popup_data.owner}</div>
+            <div className='group'>{this.state.popup_data.group}</div>
+            <div className='size'>{this.state.popup_data.size}</div>
+            <div className='date'>{this.state.popup_data.date.toString()}</div>
+            <div className='flags'>{this.state.popup_data.flags}</div>
+            <div className='deleteFile'>DELETE</div>
+            <div className='updateFile'>UPDATE</div>
           </div>
         </div>
       </div>
