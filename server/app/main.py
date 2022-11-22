@@ -53,7 +53,7 @@ sshclient = SSHClient(HOST, PORT, USER, IDENTITYFILE, PASSPHRASE)
 def helloworld():
     return 'Hello World'
 
-@app.get('/pwd')
+@app.get('/api/pwd')
 def pwd():
     # $ pwd
     successed, stdout = sshclient.execute('pwd')
@@ -63,7 +63,7 @@ def pwd():
         return {'error': stdout}
 
 
-@app.get('/ls')
+@app.get('/api/ls')
 def ls():
     # $ ls
     # $   -a # 全てのファイルを表示(隠しファイルも含む | 「.」「..」は除く)
@@ -76,7 +76,7 @@ def ls():
     else:
         return {'error': stdout}
 
-@app.get('/user')
+@app.get('/api/user')
 def user_get():
     # $ cat /etc/passwd
     successed, stdout = sshclient.execute('cat /etc/passwd')
@@ -85,7 +85,7 @@ def user_get():
     else:
         return {'error': stdout}
 
-@app.post('/user', status_code=status.HTTP_201_CREATED)
+@app.post('/api/user', status_code=status.HTTP_201_CREATED)
 def user_post(user_add_struct: UserAddStruct):
     # sudo
     # $ useradd
@@ -95,7 +95,7 @@ def user_post(user_add_struct: UserAddStruct):
     else:
         return {'error': stdout}
 
-@app.put('/user/{username}')
+@app.put('/api/user/{username}')
 def user_put(username: str, user_mod_struct: UserModStruct):
     # sudo
     # $ usermod
@@ -105,7 +105,7 @@ def user_put(username: str, user_mod_struct: UserModStruct):
     else:
         return {'error': stdout}
 
-@app.delete('/user/{username}', status_code=status.HTTP_204_NO_CONTENT)
+@app.delete('/api/user/{username}', status_code=status.HTTP_204_NO_CONTENT)
 def user_delete(username: str, user_del_struct: UserDelStruct):
     # sudo
     # $ userdel
@@ -115,7 +115,7 @@ def user_delete(username: str, user_del_struct: UserDelStruct):
     else:
         return {'error': stdout}
 
-@app.get('/group')
+@app.get('/api/group')
 def group_get():
     # sudo
     # $ cat /etc/group
@@ -125,7 +125,7 @@ def group_get():
     else:
         return {'error': stdout}
 
-@app.post('/group/{groupname}', status_code=status.HTTP_201_CREATED)
+@app.post('/api/group/{groupname}', status_code=status.HTTP_201_CREATED)
 def group_post(groupname: str, group_add_struct: GroupAddStruct):
     # sudo
     # $ groupadd
@@ -135,7 +135,7 @@ def group_post(groupname: str, group_add_struct: GroupAddStruct):
     else:
         return {'error': stdout}
 
-@app.put('/group/{groupname}')
+@app.put('/api/group/{groupname}')
 def group_put(groupname: str, group_mod_struct: GroupModStruct):
     # sudo
     # $ groupmod
@@ -145,7 +145,7 @@ def group_put(groupname: str, group_mod_struct: GroupModStruct):
     else:
         return {'error': stdout}
 
-@app.delete('/group/{groupname}', status_code=status.HTTP_204_NO_CONTENT)
+@app.delete('/api/group/{groupname}', status_code=status.HTTP_204_NO_CONTENT)
 def group_delete(groupname: str):
     # sudo
     # $ groupdel
