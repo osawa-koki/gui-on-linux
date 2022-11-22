@@ -1,6 +1,13 @@
 .File {
   max-width: 1200px;
   margin: 50px auto;
+  .cd {
+    font-family: "consolas";
+    color: white;
+    background-color: black;
+    letter-spacing: 1px;
+    padding: 10px;
+  }
   .dirfile-container {
     display: flex;
     flex-direction: column;
