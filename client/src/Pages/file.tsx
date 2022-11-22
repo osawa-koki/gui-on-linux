@@ -2,7 +2,11 @@ import React from 'react';
 
 import './File.scss';
 
+// モジュールのインポート
+import HttpClient from '../Common/HttpClient';
+
 // コンポーネントのインポート
+import Config from '../Common/Config';
 import Header from '../Components/Header';
 
 // データ型
@@ -19,6 +23,16 @@ class File extends React.Component {
     directories: [],
     files: []
   };
+
+  componentDidMount() {
+    HttpClient.Get(Config.server_origin + '/pwd')
+      .then((response) => {
+        this.setState({
+          cd: response.data.cd
+        });
+      }
+    );
+  }
 
   render() {
     return (
