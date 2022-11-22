@@ -26,4 +26,40 @@
       }
     }
   }
+  .dirfile-popup-background.on {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(black, 0.8);
+    .dirfile-popup {
+      position: absolute;
+      margin: auto;
+      width: 800px;
+      height: 500px;
+      inset: 0;
+      background-color: white;
+      .dirfile-popup-eraser {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 35px;
+        height: 35px;
+        color: white;
+        font-size: 25px;
+        font-weight: bold;
+        background-color: red;
+        border: 1px solid lightgray;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        &:hover {
+          background-color: darkred;
+        }
+      }
+    }
+  }
+  .dirfile-popup-background.off {
+    display: none;
+  }
 }

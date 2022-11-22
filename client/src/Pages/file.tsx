@@ -18,6 +18,7 @@ type Props = {
   cd: string | null;
   directories: string[];
   files: string[];
+  popup: boolean;
 };
 
 class File extends React.Component {
@@ -25,7 +26,8 @@ class File extends React.Component {
   state: Props = {
     cd: null,
     directories: [],
-    files: []
+    files: [],
+    popup: false
   };
 
   ChangeDirectory(path: string) {
@@ -39,7 +41,16 @@ class File extends React.Component {
   }
 
   ShowDetail(filename: string) {
+    this.setState({
+      popup: true
+    });
     console.log(filename);
+  }
+
+  removePopup() {
+    this.setState({
+      popup: false
+    });
   }
 
   getPwd() {
@@ -86,6 +97,11 @@ class File extends React.Component {
           <div>.</div>
           {this.state.directories}
           {this.state.files}
+        </div>
+        <div className={((this.state.popup) ? "on" : "off") + " dirfile-popup-background"}>
+          <div className='dirfile-popup'>
+            <div className='dirfile-popup-eraser' onClick={() => {this.removePopup()}}>×</div>
+          </div>
         </div>
       </div>
     );
