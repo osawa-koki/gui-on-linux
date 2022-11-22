@@ -25,10 +25,10 @@ class File extends React.Component {
   };
 
   componentDidMount() {
-    HttpClient.Get(Config.server_origin + '/pwd')
+    HttpClient.Get(Config.server_origin + '/api/pwd')
       .then((response) => {
         this.setState({
-          cd: response.data.cd
+          cd: response.cd
         });
       }
     );
