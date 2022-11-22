@@ -3,16 +3,34 @@ import React from 'react';
 import './file.scss';
 
 // コンポーネントのインポート
-import FilePwd from '../Components/FilePwd';
 
-function File(props: { pwd: string }) {
-  return (
-    <div className="File">
-      <h1 onClick={() => {props.pwd = "#"}}>ファイル管理</h1>
-      {FilePwd(props.pwd)}
-      <div>{props.pwd}</div>
-    </div>
-  );
+// データ型
+type Props = {
+  cd: string;
+  directories: string[];
+  files: string[];
+};
+
+class File extends React.Component {
+
+  state: Props = {
+    cd: "/",
+    directories: [],
+    files: []
+  };
+
+  render() {
+    return (
+      <div className='File'>
+        <h1>ファイル管理</h1>
+        <div className='cd'>{this.state.cd}</div>
+        <div className='dirfile-container'>
+          <div>..</div>
+          <div>.</div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default File;
