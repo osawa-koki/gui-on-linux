@@ -20,9 +20,21 @@ from record.UserDel import UserDelStruct
 from record.GroupAdd import GroupAddStruct
 from record.GroupMod import GroupModStruct
 
+# CORS対応
+from fastapi.middleware.cors import CORSMiddleware
 
 # FastAPIオブジェクトの生成
 app = FastAPI()
+
+# CORS対応
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # 構成ファイルの読み込み
 with open('config.yaml', 'r') as yml:
