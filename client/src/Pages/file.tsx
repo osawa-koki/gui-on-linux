@@ -9,6 +9,9 @@ import HttpClient from '../Common/HttpClient';
 import Config from '../Common/Config';
 import Header from '../Components/Header';
 
+// レコードのインポート
+import pwdRecord from '../Records/pwdRecord';
+
 // データ型
 type Props = {
   cd: string;
@@ -19,19 +22,19 @@ type Props = {
 class File extends React.Component {
 
   state: Props = {
-    cd: "/",
+    cd: "/home/osawakoki",
     directories: [],
     files: []
   };
 
   componentDidMount() {
-    HttpClient.Get(Config.server_origin + '/api/pwd')
-      .then((response) => {
-        this.setState({
-          cd: response.cd
-        });
-      }
-    );
+    // HttpClient.Get(Config.server_origin + '/api/pwd')
+    //   .then((response: pwdRecord) => {
+    //     this.setState({
+    //       cd: response.cd
+    //     });
+    //   }
+    // );
   }
 
   render() {
@@ -39,7 +42,7 @@ class File extends React.Component {
       <div className='File'>
         <Header />
         <h1>ファイル管理</h1>
-        <div className='cd'>{this.state.cd}</div>
+        <div className='cd'>$ {this.state.cd}</div>
         <div className='dirfile-container'>
           <div>..</div>
           <div>.</div>
