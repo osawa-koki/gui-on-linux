@@ -4,7 +4,7 @@ import user_img from '../Assets/user.png';
 import group_img from '../Assets/group.png';
 import proccess_img from '../Assets/proccess.png';
 import netstat_img from '../Assets/netstat.png';
-import './root.scss';
+import './Root.scss';
 
 function Root() {
   return (

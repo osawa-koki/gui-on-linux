@@ -9,11 +9,11 @@ import './index.scss';
 
 // ページ設定
 import App from './App';
-import Root from './Pages/root';
-import NotFound from './Pages/notFound';
+import Root from './Pages/Root';
+import NotFound from './Pages/NotFound';
 
 // ルーティング設定
-import File from './Pages/file';
+import File from './Pages/File';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

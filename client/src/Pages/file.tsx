@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './file.scss';
+import './File.scss';
 
 // コンポーネントのインポート
 import Header from '../Components/Header';
