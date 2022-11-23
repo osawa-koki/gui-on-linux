@@ -41,17 +41,21 @@ class File extends React.Component {
       links: 0,
       epoch: 0,
       epoch_utc: 0
-    }
+    },
   };
 
   ChangeDirectory(path: string) {
     var body: Map<string, string> = new Map();
     body.set('path', path);
-    HttpClient.Post(Config.server_origin + '/api/cd', body)
-    .then(() => {
-      this.getPwd();
-      this.GetDirFiles();
-    });
+    try {
+      HttpClient.Post(Config.server_origin + '/api/cd', body)
+      .then(() => {
+        this.getPwd();
+        this.GetDirFiles();
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   ShowDetail(filename: string) {
@@ -66,6 +70,15 @@ class File extends React.Component {
     }
   }
 
+  delete_file(event: React.MouseEvent<HTMLInputElement>) {
+    console.log(event);
+
+  }
+
+  update_file(event: React.MouseEvent<HTMLInputElement>) {
+    console.log(event);
+  }
+
   removePopup() {
     this.setState({
       popup: false
@@ -73,32 +86,40 @@ class File extends React.Component {
   }
 
   getPwd() {
-    HttpClient.Get(Config.server_origin + '/api/pwd')
-    .then((response: pwdRecord) => {
-      this.setState({
-        cd: response.cd
+    try {
+      HttpClient.Get(Config.server_origin + '/api/pwd')
+      .then((response: pwdRecord) => {
+        this.setState({
+          cd: response.cd
+        });
       });
-    });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   GetDirFiles() {
-    HttpClient.Get(Config.server_origin + '/api/ls')
-    .then((response: lsRecord[]) => {
-      const dirs: JSX.Element[] = [];
-      const files: JSX.Element[] = [];
-      response.forEach(lsObject => {
-        if (lsObject.filename.slice(-1) === '/') {
-          dirs.push(<div onDoubleClick={() => {this.ChangeDirectory(lsObject.filename)}} key={lsObject.filename}>{lsObject.filename}</div>);
-        } else {
-          files.push(<div onClick={() => {this.ShowDetail(lsObject.filename)}} key={lsObject.filename}>{lsObject.filename}</div>);
-        }
+    try {
+      HttpClient.Get(Config.server_origin + '/api/ls')
+      .then((response: lsRecord[]) => {
+        const dirs: JSX.Element[] = [];
+        const files: JSX.Element[] = [];
+        response.forEach(lsObject => {
+          if (lsObject.filename.slice(-1) === '/') {
+            dirs.push(<div className='isDir' onDoubleClick={() => {this.ChangeDirectory(lsObject.filename)}} key={lsObject.filename}>{lsObject.filename}</div>);
+          } else {
+            files.push(<div className='isFile' onClick={() => {this.ShowDetail(lsObject.filename)}} key={lsObject.filename}>{lsObject.filename}</div>);
+          }
+        });
+        this.setState({
+          directories: dirs,
+          files: files,
+          fileinfo: response
+        });
       });
-      this.setState({
-        directories: dirs,
-        files: files,
-        fileinfo: response
-      });
-    });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   componentDidMount() {
@@ -113,22 +134,27 @@ class File extends React.Component {
         <h1>ファイル管理</h1>
         <div className='cd'>$ {this.state.cd}</div>
         <div className='dirfile-container'>
-          <div onDoubleClick={() => {this.ChangeDirectory("..")}}>..</div>
-          <div>.</div>
+          <div onDoubleClick={() => {this.ChangeDirectory("..")}} className='isDir'>..</div>
+          <div className='isDir'>.</div>
           {this.state.directories}
           {this.state.files}
         </div>
         <div className={((this.state.popup) ? "on" : "off") + " dirfile-popup-background"}>
           <div className='dirfile-popup'>
             <div className='dirfile-popup-eraser' onClick={() => {this.removePopup()}}>×</div>
-            <div className='filename'>{this.state.popup_data.filename}</div>
-            <div className='owner'>{this.state.popup_data.owner}</div>
-            <div className='group'>{this.state.popup_data.group}</div>
-            <div className='size'>{this.state.popup_data.size}</div>
-            <div className='date'>{this.state.popup_data.date.toString()}</div>
-            <div className='flags'>{this.state.popup_data.flags}</div>
-            <div className='deleteFile'>DELETE</div>
-            <div className='updateFile'>UPDATE</div>
+            <input className='filename' type='text' value={this.state.popup_data.filename} onChange={(event) => this.setState({popup_data: {filename: event.target.value}})} data-prev_filename={this.state.popup_data.filename} />
+            <input className='owner' type='text' value={this.state.popup_data.owner} onChange={(event) => this.setState({popup_data: {owner: event.target.value}})} />
+            <input className='group' type='text' value={this.state.popup_data.group} onChange={(event) => this.setState({popup_data: {group: event.target.value}})} />
+            <input className='size' type='number' value={this.state.popup_data.size} onChange={(event) => this.setState({popup_data: {size: event.target.value}})} />
+            <input className='date' type='date' value={this.state.popup_data.date.toString()} onChange={(event) => this.setState({popup_data: {date: event.target.value}})} />
+            <input className='flags' type='text' value={this.state.popup_data.flags} onChange={(event) => this.setState({popup_data: {flags: event.target.value}})} />
+            {/* <input className='owner' type='text' value={this.state.popup_data.owner} />
+            <input className='group' type='text' value={this.state.popup_data.group} />
+            <input className='size' type='number' value={this.state.popup_data.size} />
+            <input className='date' type='date' value={this.state.popup_data.date.toString()} />
+            <input className='flags' type='text' value={this.state.popup_data.flags} /> */}
+            <div className='deleteFile' onClick={this.delete_file}>DELETE</div>
+            <div className='updateFile' onClick={this.update_file}>UPDATE</div>
           </div>
         </div>
       </div>

@@ -21,8 +21,31 @@
       border: 1px solid lightgray;
       margin-bottom: 15px;
       cursor: pointer;
-      &:hover {
-        background-color: rgb(194, 232, 255);
+      &.isDir {
+        &::before {
+          content: '';
+          width: 35px;
+          height: 35px;
+          margin-right: 10px;
+          background-image: url(../Assets/dir-icon.png);
+          background-size: contain;
+        }
+        &:hover {
+          background-color: rgb(255, 240, 176);
+        }
+      }
+      &.isFile {
+        &::before {
+          content: '';
+          width: 35px;
+          height: 35px;
+          margin-right: 10px;
+          background-image: url(../Assets/file-icon.png);
+          background-size: contain;
+        }
+        &:hover {
+          background-color: rgb(194, 232, 255);
+        }
       }
     }
   }
