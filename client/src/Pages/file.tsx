@@ -4,6 +4,7 @@ import './File.scss';
 
 // モジュールのインポート
 import HttpClient from '../Common/HttpClient';
+import Format from '../Common/Format';
 
 // コンポーネントのインポート
 import Config from '../Common/Config';
@@ -21,6 +22,8 @@ type Props = {
   fileinfo: lsRecord[];
   popup: boolean;
   popup_data: lsRecord;
+  popup_content: string;
+  popup_content_on: boolean;
 };
 
 class File extends React.Component {
@@ -40,8 +43,10 @@ class File extends React.Component {
       flags: '',
       links: 0,
       epoch: 0,
-      epoch_utc: 0
+      epoch_utc: 0,
     },
+    popup_content: '',
+    popup_content_on: false
   };
 
   ChangeDirectory(path: string) {
@@ -70,18 +75,19 @@ class File extends React.Component {
     }
   }
 
-  delete_file(event: React.MouseEvent<HTMLInputElement>) {
+  delete_file(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     console.log(event);
 
   }
 
-  update_file(event: React.MouseEvent<HTMLInputElement>) {
+  update_file(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     console.log(event);
   }
 
   removePopup() {
     this.setState({
-      popup: false
+      popup: false,
+      popup_content_on: false
     });
   }
 
@@ -142,14 +148,22 @@ class File extends React.Component {
         <div className={((this.state.popup) ? "on" : "off") + " dirfile-popup-background"}>
           <div className='dirfile-popup'>
             <div className='dirfile-popup-eraser' onClick={() => {this.removePopup()}}>×</div>
+            <div className='filename-text'>ファイル名</div>
             <input className='filename' type='text' value={this.state.popup_data.filename} onChange={(event) => this.setState({popup_data: {filename: event.target.value}})} data-prev_filename={this.state.popup_data.filename} />
+            <div className='owner-text'>所有者</div>
             <input className='owner' type='text' value={this.state.popup_data.owner} onChange={(event) => this.setState({popup_data: {owner: event.target.value}})} />
+            <div className='group-text'>所有者グループ</div>
             <input className='group' type='text' value={this.state.popup_data.group} onChange={(event) => this.setState({popup_data: {group: event.target.value}})} />
+            <div className='size-text'>ファイルサイズ</div>
             <input className='size' type='number' value={this.state.popup_data.size} onChange={(event) => this.setState({popup_data: {size: event.target.value}})} readOnly />
-            <input className='date' type='date' value={this.state.popup_data.date.toString()} onChange={(event) => this.setState({popup_data: {date: event.target.value}})} />
+            <div className='date-text'>最終更新日</div>
+            <input className='date' type='datetime-local' value={Format.DateTime_toStr(this.state.popup_data.date)} onChange={(event) => this.setState({popup_data: {date: event.target.value}})} />
+            <div className='flags-text'>権限</div>
             <input className='flags' type='text' value={this.state.popup_data.flags} onChange={(event) => this.setState({popup_data: {flags: event.target.value}})} />
-            <div className='deleteFile' onClick={this.delete_file}>DELETE</div>
-            <div className='updateFile' onClick={this.update_file}>UPDATE</div>
+            <button  className={((this.state.popup_content_on) ? 'off' : 'on') + ' cat-button'}>ファイルを開く</button>
+            <textarea className={((this.state.popup_content_on) ? 'on' : 'off') + ' content'} cols={100} rows={30} value={this.state.popup_content} onChange={(event) => {this.setState({popup_content: event.target.value})}} />
+            <button className='delete-button' onClick={this.delete_file}>ファイルを削除</button>
+            <button className='update-button' onClick={this.update_file}>ファイルを更新</button>
           </div>
         </div>
       </div>

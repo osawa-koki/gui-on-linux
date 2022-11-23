@@ -60,6 +60,99 @@
       height: 500px;
       inset: 0;
       background-color: white;
+      padding: 25px;
+      display: grid;
+      grid-template-columns: 150px 500px;
+      grid-template-rows: 25px 25px 25px 25px 25px 25px minmax(25px, 100px);
+      gap: 10px;
+      * {
+        font-size: 1rem;
+        font-family: 'consolas';
+        letter-spacing: 1px;
+      }
+      .filename-text {
+        grid-row: 1 / 2;
+        grid-column: 1 / 3;
+      }
+      .filename {
+        grid-row: 1 / 2;
+        grid-column: 2 / 3;
+      }
+      .owner-text {
+        grid-row: 2 / 3;
+        grid-column: 1 / 2;
+      }
+      .owner {
+        grid-row: 2 / 3;
+        grid-column: 2 / 3;
+      }
+      .group-text {
+        grid-row: 3 / 4;
+        grid-column: 1 / 2;
+      }
+      .group {
+        grid-row: 3 / 4;
+        grid-column: 2 / 3;
+      }
+      .size-text {
+        grid-row: 4 / 5;
+        grid-column: 1 / 2;
+      }
+      .size {
+        grid-row: 4 / 5;
+        grid-column: 2 / 3;
+      }
+      .date-text {
+        grid-row: 5 / 6;
+        grid-column: 1 / 2;
+      }
+      .date {
+        grid-row: 5 / 6;
+        grid-column: 2 / 3;
+      }
+      .flags-text {
+        grid-row: 6 / 7;
+        grid-column: 1 / 2;
+      }
+      .flags {
+        grid-row: 6 / 7;
+        grid-column: 2 / 3;
+      }
+      .cat-button {
+        grid-row: 7 / 8;
+        grid-column: 1 / 3;
+        display: block;
+        margin: 0 auto;
+        width: 200px;
+        height: 25px;
+        cursor: pointer;
+      }
+      .content {
+        grid-row: 7 / 8;
+        &.off {
+          opacity: 0;
+        }
+      }
+      .delete-button {
+        bottom: 10px;
+        left: 10px;
+        background-color: pink;
+      }
+      .update-button {
+        bottom: 10px;
+        right: 10px;
+        background-color: aqua;
+      }
+      .delete-button, .update-button {
+        position: absolute;
+        width: 200px;
+        height: 35px;
+        border: 1px lightgray solid;
+        cursor: pointer;
+        &:hover {
+          box-shadow: 2px 2px rgba(0, 0, 0, 0.3);
+        }
+      }
       .dirfile-popup-eraser {
         position: absolute;
         top: -5px;
