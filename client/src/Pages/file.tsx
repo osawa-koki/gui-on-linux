@@ -145,7 +145,7 @@ class File extends React.Component {
             <input className='filename' type='text' value={this.state.popup_data.filename} onChange={(event) => this.setState({popup_data: {filename: event.target.value}})} data-prev_filename={this.state.popup_data.filename} />
             <input className='owner' type='text' value={this.state.popup_data.owner} onChange={(event) => this.setState({popup_data: {owner: event.target.value}})} />
             <input className='group' type='text' value={this.state.popup_data.group} onChange={(event) => this.setState({popup_data: {group: event.target.value}})} />
-            <input className='size' type='number' value={this.state.popup_data.size} onChange={(event) => this.setState({popup_data: {size: event.target.value}})} />
+            <input className='size' type='number' value={this.state.popup_data.size} onChange={(event) => this.setState({popup_data: {size: event.target.value}})} readOnly />
             <input className='date' type='date' value={this.state.popup_data.date.toString()} onChange={(event) => this.setState({popup_data: {date: event.target.value}})} />
             <input className='flags' type='text' value={this.state.popup_data.flags} onChange={(event) => this.setState({popup_data: {flags: event.target.value}})} />
             <div className='deleteFile' onClick={this.delete_file}>DELETE</div>
