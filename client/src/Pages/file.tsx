@@ -148,11 +148,6 @@ class File extends React.Component {
             <input className='size' type='number' value={this.state.popup_data.size} onChange={(event) => this.setState({popup_data: {size: event.target.value}})} />
             <input className='date' type='date' value={this.state.popup_data.date.toString()} onChange={(event) => this.setState({popup_data: {date: event.target.value}})} />
             <input className='flags' type='text' value={this.state.popup_data.flags} onChange={(event) => this.setState({popup_data: {flags: event.target.value}})} />
-            {/* <input className='owner' type='text' value={this.state.popup_data.owner} />
-            <input className='group' type='text' value={this.state.popup_data.group} />
-            <input className='size' type='number' value={this.state.popup_data.size} />
-            <input className='date' type='date' value={this.state.popup_data.date.toString()} />
-            <input className='flags' type='text' value={this.state.popup_data.flags} /> */}
             <div className='deleteFile' onClick={this.delete_file}>DELETE</div>
             <div className='updateFile' onClick={this.update_file}>UPDATE</div>
           </div>
