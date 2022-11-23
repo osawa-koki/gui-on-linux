@@ -7,6 +7,9 @@ class SSHClient:
     # クライアントオブジェクトの生成
     client = paramiko.SSHClient()
 
+    # cd用
+    cd = None
+
     # SSH接続に関する設定
     HOST: str = None
     PORT: int = None
@@ -33,6 +36,8 @@ class SSHClient:
         self.client.connect(hostname=self.HOST, username=self.USER, port=self.PORT, key_filename=self.IDENTITYFILE, passphrase=self.PASSPHRASE)
 
     def execute(self, command: str):
+        if self.cd is not None:
+            command = 'cd "{}"; {}'.format(self.cd, command)
         logging.info('以下のコマンドを実行します。')
         logging.info(command)
         stdin, stdout, stderr = self.client.exec_command(command)
@@ -41,6 +46,9 @@ class SSHClient:
             return True, stdout.read().decode('utf-8')
         else:
             return False, stderr.read().decode('utf-8')
+
+    def cd(self, path: str):
+        self.cd = path
 
     def __del__(self):
         self.client.close()

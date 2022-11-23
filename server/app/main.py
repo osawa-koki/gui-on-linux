@@ -76,6 +76,25 @@ def ls():
     else:
         return {'error': stdout}
 
+@app.put('/api/cd/{path:path}')
+def cd(path: str):
+    # $ cd {path}
+    successed, stdout = sshclient.execute(f'cd "{path}"')
+    if successed:
+        sshclient.cd(path)
+        return {'cd': path}
+    else:
+        return {'error': stdout}
+
+@app.get('/api/cat/{path:path}')
+def cat(path: str):
+    # $ cat {path}
+    successed, stdout = sshclient.execute(f'cat "{path}"')
+    if successed:
+        return {'content': stdout}
+    else:
+        return {'error': stdout}
+
 @app.get('/api/user')
 def user_get():
     # $ cat /etc/passwd
