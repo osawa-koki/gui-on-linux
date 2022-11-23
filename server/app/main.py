@@ -81,7 +81,7 @@ def cd(path: str):
     # $ cd {path}
     successed, stdout = sshclient.execute(f'cd "{path}"')
     if successed:
-        sshclient.cd(path)
+        sshclient.cd = path
         return {'cd': path}
     else:
         return {'error': stdout}
