@@ -134,8 +134,8 @@ class File extends React.Component {
         <h1>ファイル管理</h1>
         <div className='cd'>$ {this.state.cd}</div>
         <div className='dirfile-container'>
-          <div onDoubleClick={() => {this.ChangeDirectory("..")}} className='isDir'>..</div>
-          <div className='isDir'>.</div>
+          <div onDoubleClick={() => {this.ChangeDirectory("..")}} className='isDir'>../</div>
+          <div className='isDir'>./</div>
           {this.state.directories}
           {this.state.files}
         </div>
