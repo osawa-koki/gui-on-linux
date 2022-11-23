@@ -47,8 +47,5 @@ class SSHClient:
         else:
             return False, stderr.read().decode('utf-8')
 
-    def cd(self, path: str):
-        self.cd = path
-
     def __del__(self):
         self.client.close()
