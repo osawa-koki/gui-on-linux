@@ -86,10 +86,10 @@ def cd(path: str = Body(embed=True)):
     else:
         return {'error': stdout}
 
-@app.get('/api/cat/{path:path}')
-def cat(path: str):
-    # $ cat {path}
-    successed, stdout = sshclient.execute(f'cat "{path}"')
+@app.get('/api/cat')
+def cat(filename: str):
+    # $ cat {filename}
+    successed, stdout = sshclient.execute(f'cat "{filename}"')
     if successed:
         return {'content': stdout}
     else:
