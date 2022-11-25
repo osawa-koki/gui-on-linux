@@ -1,5 +1,5 @@
 # FastAPIモジュール
-from fastapi import FastAPI, status
+from fastapi import FastAPI, status, Body
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 
@@ -76,8 +76,8 @@ def ls():
     else:
         return {'error': stdout}
 
-@app.put('/api/cd/{path:path}')
-def cd(path: str):
+@app.put('/api/cd')
+def cd(path: str = Body(embed=True)):
     # $ cd {path}
     successed, stdout = sshclient.execute(f'cd "{path}"; pwd')
     if successed:
