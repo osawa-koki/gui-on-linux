@@ -103,6 +103,20 @@ class File extends React.Component {
     }
   }
 
+  cat_file() {
+    try {
+      HttpClient.Get(Config.server_origin + '/api/cat?filename=' + this.state.popup_data.filename)
+      .then(({content}) => {
+        this.setState({
+          popup_content: content,
+          popup_content_on: true,
+        });
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   GetDirFiles() {
     try {
       HttpClient.Get(Config.server_origin + '/api/ls')
@@ -159,7 +173,7 @@ class File extends React.Component {
             <input className='date' type='datetime-local' value={Format.DateTime_toStr(this.state.popup_data.date)} onChange={(event) => this.setState({popup_data: {date: event.target.value}})} />
             <div className='flags-text'>権限</div>
             <input className='flags' type='text' value={this.state.popup_data.flags} onChange={(event) => this.setState({popup_data: {flags: event.target.value}})} />
-            <button  className={((this.state.popup_content_on) ? 'off' : 'on') + ' cat-button'}>ファイルを開く</button>
+            <button  className={((this.state.popup_content_on) ? 'off' : 'on') + ' cat-button'} onClick={() => {this.cat_file()}}>ファイルを開く</button>
             <textarea className={((this.state.popup_content_on) ? 'on' : 'off') + ' content'} cols={100} rows={30} value={this.state.popup_content} onChange={(event) => {this.setState({popup_content: event.target.value})}} />
             <button className='delete-button' onClick={this.delete_file}>ファイルを削除</button>
             <button className='update-button' onClick={this.update_file}>ファイルを更新</button>

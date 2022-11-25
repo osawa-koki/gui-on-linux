@@ -126,11 +126,20 @@
         width: 200px;
         height: 25px;
         cursor: pointer;
+        &.off {
+          display: none;
+        }
       }
       .content {
         grid-row: 7 / 8;
+        grid-column: 1 / 3;
+        height: 200px;
+        padding: 25px;
+        color: white;
+        background: black;
+        resize: none;
         &.off {
-          opacity: 0;
+          display: none;
         }
       }
       .delete-button {
