@@ -113,6 +113,24 @@ def rmdir(dirname: str):
     else:
         return {'error': stdout}
 
+@app.post('/api/touch')
+def touch(filename: str):
+    # $ touch {filename}
+    successed, stdout = sshclient.execute(f'touch "{filename}"')
+    if successed:
+        return {'result': stdout}
+    else:
+        return {'error': stdout}
+
+@app.post('/api/mkdir')
+def mkdir(dirname: str):
+    # $ mkdir {dirname}
+    successed, stdout = sshclient.execute(f'mkdir "{dirname}"')
+    if successed:
+        return {'result': stdout}
+    else:
+        return {'error': stdout}
+
 @app.get('/api/user')
 def user_get():
     # $ cat /etc/passwd
