@@ -8,6 +8,19 @@
     letter-spacing: 1px;
     padding: 10px;
   }
+  .mk-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 25px;
+    > div {
+      padding: 25px;
+      border: 1px lightgray solid;
+      * {
+        display: block;
+        margin: 10px 10px 10px 0;
+      }
+    }
+  }
   .dirfile-container {
     display: flex;
     flex-direction: column;

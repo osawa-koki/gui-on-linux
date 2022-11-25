@@ -24,7 +24,12 @@ type Props = {
   popup_data: lsRecord;
   popup_content: string;
   popup_content_on: boolean;
+  mkstruct: mkStruct;
 };
+type mkStruct = {
+  filename: string;
+  dirname: string;
+}
 
 class File extends React.Component {
 
@@ -46,7 +51,11 @@ class File extends React.Component {
       epoch_utc: 0,
     },
     popup_content: '',
-    popup_content_on: false
+    popup_content_on: false,
+    mkstruct: {
+      filename: '',
+      dirname: '',
+    },
   };
 
   ChangeDirectory(path: string) {
@@ -152,6 +161,16 @@ class File extends React.Component {
         <Header />
         <h1>ファイル管理</h1>
         <div className='cd'>$ {this.state.cd}</div>
+        <div className='mk-container'>
+          <div>
+            <input className='mkfile-input' type='text' value={this.state.mkstruct.filename} onChange={(event) => this.setState({mkstruct: {filename: event.target.value}})} />
+            <button>ファイルを作成</button>
+          </div>
+          <div>
+            <input className='mkdir-input' type='text' value={this.state.mkstruct.dirname} onChange={(event) => this.setState({mkstruct: {dirname: event.target.value}})} />
+            <button>ディレクトリを作成</button>
+          </div>
+        </div>
         <div className='dirfile-container'>
           <div onDoubleClick={() => {this.ChangeDirectory("../")}} className='isDir'>../</div>
           <div className='isDir'>./</div>
