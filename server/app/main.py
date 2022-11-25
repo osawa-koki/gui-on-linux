@@ -95,6 +95,24 @@ def cat(filename: str):
     else:
         return {'error': stdout}
 
+@app.delete('/api/rm')
+def rm(filename: str):
+    # $ rm {filename}
+    successed, stdout = sshclient.execute(f'rm "{filename}"')
+    if successed:
+        return {'result': stdout}
+    else:
+        return {'error': stdout}
+
+@app.delete('/api/rmdir')
+def rmdir(dirname: str):
+    # $ rmdir {dirname}
+    successed, stdout = sshclient.execute(f'rm -rf "{dirname}"')
+    if successed:
+        return {'result': stdout}
+    else:
+        return {'error': stdout}
+
 @app.get('/api/user')
 def user_get():
     # $ cat /etc/passwd
