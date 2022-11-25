@@ -24,7 +24,7 @@ const HttpClient = {
   },
   async Post(
     url: string,
-    body: Map<string, string> | null = null
+    body: object = {}
   ) {
     const response = await fetch(url, {
       method: "POST",
@@ -41,7 +41,7 @@ const HttpClient = {
   },
   async Put(
     url: string,
-    body: Map<string, string> | null = null
+    body: object = {}
   ) {
     const response = await fetch(url, {
       method: "PUT",
@@ -58,7 +58,7 @@ const HttpClient = {
   },
   async Delete(
     url: string,
-    body: Map<string, string> | null = null
+    body: object = {}
   ) {
     const response = await fetch(url, {
       method: "DELETE",
