@@ -79,10 +79,10 @@ def ls():
 @app.put('/api/cd/{path:path}')
 def cd(path: str):
     # $ cd {path}
-    successed, stdout = sshclient.execute(f'cd "{path}"')
+    successed, stdout = sshclient.execute(f'cd "{path}"; pwd')
     if successed:
-        sshclient.cd = path
-        return {'cd': path}
+        sshclient.cd = stdout.strip()
+        return {'cd': sshclient.cd}
     else:
         return {'error': stdout}
 
