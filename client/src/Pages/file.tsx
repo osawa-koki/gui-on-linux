@@ -50,10 +50,9 @@ class File extends React.Component {
   };
 
   ChangeDirectory(path: string) {
-    var body: Map<string, string> = new Map();
-    body.set('path', path);
+    var body: object = {'path': path};
     try {
-      HttpClient.Post(Config.server_origin + '/api/cd', body)
+      HttpClient.Put(Config.server_origin + '/api/cd', body)
       .then(() => {
         this.getPwd();
         this.GetDirFiles();
@@ -140,7 +139,7 @@ class File extends React.Component {
         <h1>ファイル管理</h1>
         <div className='cd'>$ {this.state.cd}</div>
         <div className='dirfile-container'>
-          <div onDoubleClick={() => {this.ChangeDirectory("..")}} className='isDir'>../</div>
+          <div onDoubleClick={() => {this.ChangeDirectory("../")}} className='isDir'>../</div>
           <div className='isDir'>./</div>
           {this.state.directories}
           {this.state.files}
