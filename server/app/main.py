@@ -95,7 +95,7 @@ def cat(filename: str):
     else:
         return {'error': stdout}
 
-@app.delete('/api/rm')
+@app.delete('/api/rm', status_code=status.HTTP_204_NO_CONTENT)
 def rm(filename: str):
     # $ rm {filename}
     successed, stdout = sshclient.execute(f'rm "{filename}"')
@@ -104,7 +104,7 @@ def rm(filename: str):
     else:
         return {'error': stdout}
 
-@app.delete('/api/rmdir')
+@app.delete('/api/rmdir', status_code=status.HTTP_204_NO_CONTENT)
 def rmdir(dirname: str):
     # $ rmdir {dirname}
     successed, stdout = sshclient.execute(f'rm -rf "{dirname}"')
@@ -113,8 +113,8 @@ def rmdir(dirname: str):
     else:
         return {'error': stdout}
 
-@app.post('/api/touch')
-def touch(filename: str):
+@app.post('/api/touch', status_code=status.HTTP_201_CREATED)
+def touch(filename: str = Body(embed=True)):
     # $ touch {filename}
     successed, stdout = sshclient.execute(f'touch "{filename}"')
     if successed:
@@ -122,7 +122,7 @@ def touch(filename: str):
     else:
         return {'error': stdout}
 
-@app.post('/api/mkdir')
+@app.post('/api/mkdir', status_code=status.HTTP_201_CREATED)
 def mkdir(dirname: str):
     # $ mkdir {dirname}
     successed, stdout = sshclient.execute(f'mkdir "{dirname}"')
