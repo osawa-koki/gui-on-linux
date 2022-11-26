@@ -104,7 +104,7 @@ class File extends React.Component {
       if (this.state.fileinfo[i].filename === filename) {
         this.setState({
           popup: true,
-          popup_data: this.state.fileinfo[i]
+          popup_data: this.state.fileinfo[i],
         });
         break;
       }
