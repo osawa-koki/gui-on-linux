@@ -85,6 +85,20 @@ class File extends React.Component {
     }
   }
 
+  make_dir() {
+    var body: object = {
+      'dirname': this.state.mkstruct.dirname,
+    };
+    try {
+      HttpClient.Post(Config.server_origin + '/api/mkdir', body)
+      .then(() => {
+        this.GetDirFiles();
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   ShowDetail(filename: string) {
     for (let i = 0; i < this.state.fileinfo.length; i++) {
       if (this.state.fileinfo[i].filename === filename) {
@@ -182,7 +196,7 @@ class File extends React.Component {
           </div>
           <div>
             <input className='mkdir-input' type='text' value={this.state.mkstruct.dirname} onChange={(event) => this.setState({mkstruct: {dirname: event.target.value}})} />
-            <button>ディレクトリを作成</button>
+            <button onClick={() => this.make_dir()}>ディレクトリを作成</button>
           </div>
         </div>
         <div className='dirfile-container'>

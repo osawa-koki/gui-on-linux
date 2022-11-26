@@ -123,7 +123,7 @@ def touch(filename: str = Body(embed=True)):
         return {'error': stdout}
 
 @app.post('/api/mkdir', status_code=status.HTTP_201_CREATED)
-def mkdir(dirname: str):
+def mkdir(dirname: str = Body(embed=True)):
     # $ mkdir {dirname}
     successed, stdout = sshclient.execute(f'mkdir "{dirname}"')
     if successed:
