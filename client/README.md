@@ -44,3 +44,18 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## 自分用メモ
+
+```shell
+# https://create-react-app.dev/docs/adding-typescript/
+yarn create react-app <プロジェクト名> --template typescript
+```
+
+同ドキュメントには「create-react-app」が非推奨であることが発表されている。  
+
+```text
+If you've previously installed create-react-app globally via npm install -g create-react-app, we recommend you uninstall the package using npm uninstall -g create-react-app or yarn global remove create-react-app to ensure that npx always uses the latest version.
+
+Global installs of create-react-app are no longer supported.
+```
